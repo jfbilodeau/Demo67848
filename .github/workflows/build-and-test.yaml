@@ -1,0 +1,31 @@
+name: Build and Test ASP.NET # The name of the workflow
+
+on: # Specifies the events that trigger the workflow
+  push: # Trigger the workflow on push events
+    branches:
+      - main # Only trigger on pushes to the main branch
+  pull_request: # Trigger the workflow on pull request events
+    branches:
+      - main # Only trigger on pull requests to the main branch
+
+jobs: # Defines the jobs to be run
+  build: # The name of the job
+    runs-on: ubuntu-latest # The job will run on the latest version of Ubuntu
+
+    steps: # The steps to be executed in the job
+    - name: Checkout code # Step to check out the code from the repository
+      uses: actions/checkout@v2 # Uses the checkout action to clone the repository
+
+    - name: Setup .NET # Step to set up the .NET environment
+      uses: actions/setup-dotnet@v3 # Uses the setup-dotnet action
+      with:
+        dotnet-version: '8.0' # Specifies the .NET version to use
+
+    - name: Restore dependencies # Step to restore the project's dependencies
+      run: dotnet restore # Runs the dotnet restore command
+
+    - name: Build # Step to build the project
+      run: dotnet build --no-restore # Runs the dotnet build command without restoring dependencies again
+
+    - name: Test # Step to run tests
+      run: dotnet test --no-build --verbosity normal # Runs the dotnet test command without building the project again
