@@ -1,4 +1,4 @@
-.name: Build and Test ASP.NET # The name of the workflow
+name: Build and Test ASP.NET # The name of the workflow
 
 on: # Specifies the events that trigger the workflow
   push: # Trigger the workflow on push events
