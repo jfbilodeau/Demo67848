@@ -68,8 +68,21 @@ jobs: # Defines the jobs to be run
     needs: setup-prod-env # Ensures this job runs after the build job
 
     steps:
+      - name: Azure Login
+        uses: Azure/login@v1.5.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
           name: DemoWebApp
           path: .
+
+      - name: Deploy to Azure Web App
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: 'demo67848prop'
+          slot-name: 'production'
+          package: .
+          
