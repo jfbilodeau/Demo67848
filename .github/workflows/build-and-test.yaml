@@ -48,13 +48,16 @@ jobs: # Defines the jobs to be run
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy Bicep template
-      uses: azure/arm-deploy@v1
-      with:
-        subscriptionId: ${{ env.AZURE_SUBSCRIPTION }}
-        resourceGroupName: ${{ env.AZURE_RG }}
-        template: ./deploy/template.bicep
-        parameters: './deploy/parameters.prod.json'
-        # failOnStdErr: false
+      run: az deployment group create --resource-group Demo67848 --template-file ./deploy/template.bicep --parameters ./deploy/parameters.prod.json
+
+    # - name: Deploy Bicep template
+    #   uses: azure/arm-deploy@v1
+    #   with:
+    #     subscriptionId: ${{ env.AZURE_SUBSCRIPTION }}
+    #     resourceGroupName: ${{ env.AZURE_RG }}
+    #     template: ./deploy/template.bicep
+    #     parameters: './deploy/parameters.prod.json'
+    #     # failOnStdErr: false
 
   deploy:
     runs-on: 'ubuntu-latest'
