@@ -48,7 +48,7 @@ jobs: # Defines the jobs to be run
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Deploy Bicep template
-      uses: Azure/bicep@v0
+      uses: azure/arm-deploy@v1
       with:
         subscriptionId: ${{ env.AZURE_SUBSCRIPTION }}
         resourceGroupName: ${{ env.AZURE_RG }}
