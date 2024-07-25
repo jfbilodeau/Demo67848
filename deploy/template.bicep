@@ -18,6 +18,9 @@ resource webApp 'Microsoft.Web/sites@2021-02-01' = {
   location: location
   properties: {
     serverFarmId: appServicePlan.id
+    siteConfig: {
+      netFrameworkVersion: 'v8.0'
+    }
   }
 }
 
